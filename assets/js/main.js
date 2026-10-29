@@ -137,21 +137,31 @@
     });
   };
   const setupTitleRotation = () => {
-    const track = $(".role-track"), accessible = $("#role-title-accessible");
+    const output = $("#role-typing"), accessible = $("#role-title-accessible");
     const roles = (window.PORTFOLIO_CONFIG?.roleTitles || [window.PORTFOLIO_CONFIG?.title]).filter(Boolean);
-    if (!track || !roles.length) return;
-    accessible.textContent = roles.join(" · ");
-    const makeGroup = () => {
-      const group = make("span", "role-group");
-      roles.forEach((role, index) => {
-        if (index) group.append(make("span", "role-separator", "✳"));
-        group.append(make("span", "accent-text role-item", role));
-      });
-      return group;
+    if (!output || !accessible || !roles.length) return;
+    accessible.textContent = roles.join(". ");
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || roles.length < 2) { output.textContent = roles[0]; return; }
+    let roleIndex = 0, characterIndex = 0, deleting = false;
+    const typeNext = () => {
+      const characters = Array.from(roles[roleIndex]);
+      if (!deleting && characterIndex < characters.length) {
+        output.textContent = characters.slice(0, ++characterIndex).join("");
+        window.setTimeout(typeNext, 78);
+      } else if (!deleting) {
+        deleting = true;
+        window.setTimeout(typeNext, 1250);
+      } else if (characterIndex > 0) {
+        output.textContent = characters.slice(0, --characterIndex).join("");
+        window.setTimeout(typeNext, 38);
+      } else {
+        deleting = false;
+        roleIndex = (roleIndex + 1) % roles.length;
+        window.setTimeout(typeNext, 220);
+      }
     };
-    track.replaceChildren(makeGroup());
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || roles.length < 2) { track.classList.add("is-static"); return; }
-    track.append(makeGroup());
+    output.textContent = "";
+    typeNext();
   };
   const setup = () => {
     const toggle = $(".menu-toggle"), nav = $("#nav-links");

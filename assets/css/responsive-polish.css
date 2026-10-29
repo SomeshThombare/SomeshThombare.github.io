@@ -27,7 +27,6 @@ body { overflow-x: clip; }
   .hero { min-height: auto; grid-template-columns: minmax(0,1fr); gap: 20px; padding-top: clamp(54px, 9vw, 82px); padding-bottom: 72px; }
   .hero-copy { max-width: 700px; }
   .hero-art { width: min(100%, 570px); height: clamp(310px, 48vw, 410px); margin: 8px auto 0; }
-  .role-marquee { flex-basis: min(100%, 500px); }
   .about-grid, .contact-top { grid-template-columns: minmax(0,1fr); }
   .contact-top { gap: 28px; }
   .contact-details { padding: 22px 0 0; border: 0; border-top: 1px solid var(--line); }
@@ -43,7 +42,6 @@ body { overflow-x: clip; }
   .hero-hello { font-size: 17px; }
   .hero h1 { max-width: 100%; font-size: clamp(34px, 8.4vw, 52px); line-height: 1.08; letter-spacing: -.06em; overflow-wrap: anywhere; }
   .hero-role { min-width: 0; margin: 9px 0 15px; font-size: clamp(17px, 5vw, 24px); }
-  .role-marquee { min-width: 0; flex: 1 1 0; width: 100%; }
   .hero-intro { font-size: 13px; line-height: 1.8; }
   .hero-actions { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 9px; margin-top: 20px; }
   .hero-actions .button { min-width: 0; min-height: 45px; padding-inline: 9px; gap: 7px; font-size: 10px; }

@@ -22,12 +22,7 @@ body::after {
 
 .hero h1 { font-size: clamp(42px, 5.6vw, 65px); white-space: nowrap; }
 .hero-role { display: flex; max-width: 100%; align-items: center; gap: 7px; }
-.role-marquee { display: block; flex: 0 1 470px; min-width: 0; overflow: hidden; white-space: nowrap; mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent); }
-.role-track { display: flex; width: max-content; animation: role-marquee 22s linear infinite; }
-.role-track.is-static { animation: none; }
-.role-group { display: inline-flex; flex: none; align-items: center; gap: 20px; padding-right: 20px; }
-.role-item { flex: none; }
-.role-separator { color: var(--violet); font: 13px var(--mono); }
+.role-typing { display: inline-block; min-width: 0; min-height: 1.35em; white-space: nowrap; }
 .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 
 .orbit-one { animation: orbit-drift 28s linear infinite; }
@@ -69,8 +64,6 @@ body::after {
 
 @keyframes orbit-drift { to { rotate: 1turn; } }
 @keyframes core-breathe { 0%, 100% { box-shadow: 0 0 48px rgba(87, 178, 196, .09); } 50% { box-shadow: 0 0 72px rgba(87, 178, 196, .17); } }
-@keyframes role-marquee { to { transform: translateX(-50%); } }
-
 @media (max-width: 780px) {
   .footer-brand-col { align-items: flex-start; flex-direction: column; gap: 7px; }
   .footer-summary { max-width: 290px; }
@@ -78,7 +71,6 @@ body::after {
 @media (max-width: 560px) {
   .hero h1 { font-size: clamp(30px, 9.3vw, 52px); }
   .hero-role { gap: 3px; font-size: clamp(17px, 5vw, 23px); }
-  .role-marquee { flex-basis: 100%; }
   .footer-inner { flex-wrap: wrap; justify-content: space-between; padding-block: 18px; }
   .footer-brand-col { flex-basis: 100%; align-items: center; text-align: center; }
   .footer-summary { max-width: 340px; }
@@ -86,6 +78,6 @@ body::after {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .orbit-one, .orbit-two, .art-core, .role-track { animation: none !important; }
+  .orbit-one, .orbit-two, .art-core { animation: none !important; }
   .has-reveal .reveal-item { opacity: 1; transform: none; transition: none; }
 }

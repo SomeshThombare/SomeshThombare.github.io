@@ -58,7 +58,6 @@ body::after { opacity: .075; background-size: 88px 88px; }
 .hero-hello { color: var(--cyan); font-size: 20px; font-weight: 500; margin-bottom: 7px; }
 .hero h1 { max-width: 100%; font-size: clamp(42px, 5.2vw, 66px); font-weight: 700; letter-spacing: -.065em; line-height: 1.12; }
 .hero-role { margin: 10px 0 21px; color: #aaa7b9; font-weight: 500; }
-.role-marquee { flex-basis: 500px; }
 .hero-intro { max-width: 570px; color: #aaa9ba; font-size: 15px; line-height: 1.9; }
 .hero-actions { gap: 13px; }
 .hero-social { gap: 12px; margin-top: 34px; }
