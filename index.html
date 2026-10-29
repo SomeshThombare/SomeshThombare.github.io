@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090a0f">
+  <meta name="description" content="Somesh Thombare — Python Full-Stack Developer building web applications and AI-powered systems.">
+  <title>Somesh Thombare | Python Full-Stack Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+  <link rel="stylesheet" href="assets/css/motion.css">
+  <link rel="stylesheet" href="assets/css/design-refresh.css">
+  <script defer src="assets/js/config.js"></script>
+  <script defer src="assets/js/education.js"></script>
+  <script defer src="assets/js/experience.js"></script>
+  <script defer src="assets/js/skills.js"></script>
+  <script defer src="assets/js/certifications.js"></script>
+  <script defer src="assets/js/projects.js"></script>
+  <script defer src="assets/js/main.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" id="top">
+    <nav class="nav wrap" aria-label="Main navigation">
+      <a class="brand" href="#home" aria-label="Portfolio home"><span class="brand-mark">ST</span><span data-config="nameShort">SAM</span><span class="brand-period">.</span></a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Open navigation"><span></span><span></span></button>
+      <div class="nav-links" id="nav-links">
+        <a href="#about">About</a><a href="#education">Education</a><a href="#experience">Experience</a><a href="#skills">Skills</a><a href="#certifications">Certificates</a><a href="#projects">Projects</a>
+        <a class="button button-small button-outline nav-contact" href="#contact">Contact Me <span aria-hidden="true">↗</span></a>
+        <a class="button button-small button-resume" data-resume href="assets/js/resume.pdf" download>Resume <span aria-hidden="true">↓</span></a>
+        <button class="theme-toggle" type="button" id="theme-toggle" aria-label="Switch to light theme" aria-pressed="false"><span class="theme-toggle-icon" aria-hidden="true">☼</span><span class="theme-toggle-label">Light</span></button>
+      </div>
+    </nav>
+  </header>
+  <main id="main">
+    <section class="hero wrap section-pad" id="home" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="status-dot"></span><span data-config="availability">Available for opportunities</span></p>
+        <p class="hero-hello">Hello, I’m</p>
+        <h1 id="hero-title" data-config="name">Your Name</h1>
+        <h2 class="hero-role"><span class="visually-hidden" id="role-title-accessible">Python Full-Stack Developer</span><span class="role-marquee" aria-hidden="true"><span class="role-track"><span class="role-fallback accent-text" data-config="title">Python Full-Stack Developer</span></span></span><span class="cursor" aria-hidden="true">_</span></h2>
+        <p class="hero-intro" data-config="intro">I build thoughtful digital experiences and practical software that solves real problems.</p>
+        <div class="hero-actions"><a class="button button-primary" href="#projects">View Projects <span aria-hidden="true">↘</span></a><a class="button button-quiet" href="#contact">Contact Me <span aria-hidden="true">↗</span></a><a class="button button-outline hero-resume" data-resume href="assets/js/resume.pdf" download>Download Resume <span aria-hidden="true">↓</span></a></div>
+        <div class="hero-social" data-socials aria-label="Social links"></div>
+      </div>
+      <div class="hero-art" aria-label="Technologies I work with">
+        <div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div>
+        <div class="art-core"><span class="core-bracket">{ }</span><span>building<br>with intent</span></div>
+        <span class="float-tag tag-python"><b>Py</b> Python</span><span class="float-tag tag-react"><b>◉</b> React</span><span class="float-tag tag-ai"><b>✳</b> AI / ML</span><span class="float-tag tag-fast"><b>⚡</b> FastAPI</span><span class="float-tag tag-rag"><b>⌘</b> RAG &amp; LLMs</span><span class="float-tag tag-data"><b>▤</b> Databases</span>
+        <span class="art-cross cross-one">+</span><span class="art-cross cross-two">+</span><span class="art-stamp">SELECTED<br>TECH · 2026</span>
+      </div>
+      <a class="scroll-cue" href="#about"><span></span> Scroll to explore</a>
+    </section>
+    <section class="section wrap section-pad" id="about" aria-labelledby="about-title">
+      <div class="section-heading"><p class="section-index">01.</p><h2 id="about-title">About <span class="muted">Me</span></h2></div>
+      <div class="about-grid"><article class="panel about-panel"><p class="panel-kicker">THE PERSON BEHIND THE WORK</p><h3 data-config="aboutHeading">Curious by nature.<br><span class="muted">Builder by choice.</span></h3><p data-config="about">I’m a developer who enjoys turning complex ideas into clear, useful products. I value clean engineering, collaborative work, and learning something new with every project.</p><div class="about-highlights" id="about-highlights"></div><div class="about-note"><span class="note-symbol">↗</span><span data-config="location">Based in Your City</span><span class="note-rule"></span><span>Open to remote</span></div></article>
+        <article class="panel education-panel" id="education"><p class="panel-kicker"> &nbsp; EDUCATION</p><div class="entry-list" id="education-list"></div></article></div>
+    </section>
+    <section class="section wrap section-pad" id="experience" aria-labelledby="experience-title"><div class="section-heading"><p class="section-index">02.</p><h2 id="experience-title">Internship <span class="muted">Experience</span></h2><p class="section-lede">Practical work across full-stack development, APIs, and AI projects.</p></div><div class="timeline" id="experience-list"></div></section>
+    <section class="section skills-section" id="skills" aria-labelledby="skills-title"><div class="wrap section-pad"><div class="section-heading"><p class="section-index">03.</p><h2 id="skills-title">Technical <span class="muted">Skills</span></h2><p class="section-lede">Tools and technologies from my projects and internships.</p></div><div class="skills-grid" id="skills-list"></div></div></section>
+    <section class="section wrap section-pad" id="certifications" aria-labelledby="certifications-title"><div class="section-heading"><p class="section-index">04.</p><h2 id="certifications-title">Certifications &amp; <span class="muted">Achievements</span></h2></div><div class="cert-grid" id="certifications-list"></div></section>
+    <section class="section projects-section" id="projects" aria-labelledby="projects-title"><div class="wrap section-pad"><div class="section-heading heading-row"><div><p class="section-index">05.</p><h2 id="projects-title">Selected <span class="muted">Projects</span></h2><p class="section-lede">AI-powered products for agriculture and financial markets.</p></div><span class="project-count" id="project-count"></span></div><div class="projects-grid" id="projects-list"></div></div></section>
+    <section class="section wrap section-pad stats-section" aria-labelledby="stats-title"><div class="section-heading"><p class="section-index">06.</p><h2 id="stats-title">Project <span class="muted">Statistics</span></h2></div><div class="stats-grid" id="stats-list"></div></section>
+    <section class="section wrap section-pad contact-section" id="contact" aria-labelledby="contact-title"><div class="contact-top"><div><p class="section-index">07. <span></span> WHAT’S NEXT?</p><h2 id="contact-title">Get in <span class="accent-text">Touch</span></h2><p class="contact-lede" data-config="contactIntro">Have a project in mind, or just want to say hello? My inbox is always open.</p><a class="button button-primary" data-email-button href="mailto:hello@example.com">Say Hello <span aria-hidden="true">↗</span></a></div><div class="contact-details"><p class="panel-kicker">FIND ME HERE</p><a data-email-link href="mailto:hello@example.com"><span class="detail-icon">@</span><span data-config="email">hello@example.com</span><span class="detail-arrow">↗</span></a><p><span class="detail-icon">⌖</span><span data-config="location">Based in Your City</span></p><div data-contact-socials></div></div></div>
+      <form class="contact-form panel" id="contact-form"><div class="form-heading"><p class="panel-kicker">OR SEND A NOTE</p><span class="form-static">STATIC SITE · OPENS YOUR EMAIL APP</span></div><div class="form-grid"><label>Your name<input name="name" autocomplete="name" required maxlength="100" placeholder="Jane Smith"></label><label>Your email<input type="email" name="email" autocomplete="email" required maxlength="200" placeholder="jane@example.com"></label><label class="form-wide">Subject<input name="subject" required maxlength="150" placeholder="A little about your idea"></label><label class="form-wide">Message<textarea name="message" required rows="4" maxlength="3000" placeholder="Tell me what you’re thinking..."></textarea></label></div><button class="button button-primary" type="submit">Prepare email <span aria-hidden="true">↗</span></button><p class="form-help" id="form-help" aria-live="polite">This static form opens your email app; it does not send or store messages. <a id="compose-fallback" class="compose-fallback" href="mailto:hello@example.com" hidden>Open the prepared email draft</a></p></form>
+    </section>
+  </main>
+  <footer class="footer"><div class="wrap"><div class="footer-main"><div class="footer-brand-col"><a class="brand" href="#top"><span class="brand-mark">ST</span><span data-config="nameShort">SAM</span><span class="brand-period">.</span></a><p class="footer-summary" data-config="footerIntro">Python Full-Stack Developer building practical web and AI systems for agriculture and finance.</p></div><nav class="footer-links" aria-label="Footer navigation"><p class="footer-label">EXPLORE</p><a href="#about">About &amp; Education</a><a href="#experience">Experience</a><a href="#skills">Technical Skills</a><a href="#projects">Projects</a></nav><div class="footer-connect"><p class="footer-label">LET’S CONNECT</p><a class="footer-email" data-email-link href="mailto:hello@example.com"><span data-config="email">hello@example.com</span><span aria-hidden="true">↗</span></a><div class="footer-socials" data-footer-socials aria-label="Social links"></div></div></div><div class="footer-bottom"><p>© <span id="year"></span> <span data-config="name">Somesh Thombare</span>. All rights reserved.</p><p>Designed &amp; built with care</p><a href="#top" class="back-top">Back to top ↑</a></div></div></footer>
+  <dialog class="project-dialog" id="project-dialog" aria-labelledby="dialog-title"><div class="dialog-content"><button class="dialog-close" type="button" aria-label="Close project details">×</button><div id="dialog-body"></div></div></dialog>
+</body>
+</html>
