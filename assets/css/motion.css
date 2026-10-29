@@ -36,11 +36,12 @@ body::after {
 
 .reveal-item { --reveal-delay: 0ms; }
 .has-reveal .reveal-item {
-  opacity: 0;
-  transform: translateY(18px);
+  /* Keep content visible if a quick scroll or anchor jump skips an observer callback. */
+  opacity: 1;
+  transform: none;
   transition: opacity .65s ease var(--reveal-delay), transform .65s cubic-bezier(.2,.7,.2,1) var(--reveal-delay);
 }
-.has-reveal .reveal-item.is-visible { opacity: 1; transform: translateY(0); }
+.has-reveal .reveal-item.is-visible { opacity: 1; transform: none; }
 
 .skill-card, .cert-card, .timeline-card, .about-panel, .education-panel {
   transition: border-color .25s ease, background-color .25s ease, transform .25s ease;
