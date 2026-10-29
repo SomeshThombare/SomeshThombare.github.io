@@ -148,7 +148,6 @@ body::after { opacity: .075; background-size: 88px 88px; }
 .cert-mark { background: rgba(155,105,237,.13); color: #b397f3; }
 .cert-card .text-link { margin-top: 12px; }
 
-.project-count { color: var(--cyan); }
 .projects-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; align-items: stretch; }
 .project-card { display: flex; height: 100%; flex-direction: column; background: rgba(18,19,27,.96); }
 .project-visual { height: 180px; flex: none; }

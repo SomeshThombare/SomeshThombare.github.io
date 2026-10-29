@@ -72,7 +72,6 @@ body { overflow-x: clip; }
   .heading-row { align-items: flex-start; gap: 10px; }
   .heading-row > div { min-width: 0; grid-template-columns: max-content minmax(0,1fr); column-gap: 10px; row-gap: 6px; }
   .heading-row .section-lede { grid-column: 1 / -1; font-size: 12px; line-height: 1.65; }
-  .project-count { padding-top: 4px; font-size: 7px; text-align: right; white-space: nowrap; }
   .about-grid, .skills-grid, .cert-grid, .projects-grid, .contact-top { grid-template-columns: minmax(0,1fr); }
   .about-grid { gap: 14px; }
   .about-panel, .education-panel { min-height: 0; padding: 23px 20px; }
