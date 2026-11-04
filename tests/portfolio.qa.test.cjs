@@ -53,6 +53,10 @@ test('QA-005 projects include meaningful detail and secure repository links', ()
   }
   const source = read('assets/js/main.js');
   assert.match(source, /a\.rel = "noopener noreferrer"/);
+  assert.match(source, /safeUrl\(p\.video\)/);
+  assert.match(source, /Watch Video/);
+  assert.match(source, /showVideo\(p\)/);
+  assert.match(source, /player\.controls = true/);
 });
 
 test('QA-006 stat logic counts only the ten named technologies once each', () => {

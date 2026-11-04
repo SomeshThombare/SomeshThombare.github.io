@@ -100,8 +100,8 @@ body { overflow-x: clip; }
   .project-body { padding: 19px; }
   .project-title { font-size: 17px; line-height: 1.4; overflow-wrap: anywhere; }
   .project-summary { min-height: 0; font-size: 11px; line-height: 1.7; }
-  .project-actions { gap: 8px; padding-top: 13px; }
-  .project-detail-button { min-width: 0; padding-inline: 8px; font-size: 9px; }
+  .project-actions { flex-wrap: wrap; gap: 8px; padding-top: 13px; }
+  .project-detail-button, .button-video { flex: 1 1 40%; min-width: 0; padding-inline: 8px; font-size: 9px; }
   .button-github { flex: none; padding-inline: 10px; font-size: 9px; }
   .stats-section { padding-block: 48px 64px; }
   .stats-grid { gap: 9px; }

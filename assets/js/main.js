@@ -98,7 +98,7 @@
     const icon = make("span", "social-glyph"); appendSocialIcon(icon, { label: "GitHub" }); button.prepend(icon);
     return button;
   };
-  const renderProjects = () => { const root = $("#projects-list"); const items = window.PROJECTS || []; items.forEach((p, i) => { const card = make("article", "panel project-card"); const visual = make("div", `project-visual project-visual-${i % 3}`); if (p.image) addImage(visual, p.image, `${p.title} preview`, "project-image"); if (!visual.querySelector("img")) visual.append(make("span", "visual-mark", String(i + 1).padStart(2, "0")), make("span", "visual-orbit"), make("span", "visual-caption", (p.technologies || []).slice(0, 3).join(" · "))); card.append(visual); const body = make("div", "project-body"); body.append(make("p", "panel-kicker", p.category || "PROJECT"), make("h3", "project-title", p.title), make("p", "project-summary", p.solution || p.problem || "")); const chips = make("div", "chip-row"); (p.technologies || []).forEach(t => chips.append(make("span", "chip", t))); body.append(chips); const actions = make("div", "project-actions"); const details = make("button", "button button-small button-primary project-detail-button", "View Details ↗"); details.type = "button"; details.addEventListener("click", () => showDetails(p)); actions.append(details); const repo = makeGithubButton(p.repositoryUrl, "GitHub", "button button-small button-github"); if (repo) actions.append(repo); body.append(actions); card.append(body); root.append(card); }); if (!items.length) root.append(make("p", "empty-state", "Add projects in projects.js.")); };
+  const renderProjects = () => { const root = $("#projects-list"); const items = window.PROJECTS || []; items.forEach((p, i) => { const card = make("article", "panel project-card"); const visual = make("div", `project-visual project-visual-${i % 3}`); if (p.image) addImage(visual, p.image, `${p.title} preview`, "project-image"); if (!visual.querySelector("img")) visual.append(make("span", "visual-mark", String(i + 1).padStart(2, "0")), make("span", "visual-orbit"), make("span", "visual-caption", (p.technologies || []).slice(0, 3).join(" · "))); card.append(visual); const body = make("div", "project-body"); body.append(make("p", "panel-kicker", p.category || "PROJECT"), make("h3", "project-title", p.title), make("p", "project-summary", p.solution || p.problem || "")); const chips = make("div", "chip-row"); (p.technologies || []).forEach(t => chips.append(make("span", "chip", t))); body.append(chips); const actions = make("div", "project-actions"); const details = make("button", "button button-small button-primary project-detail-button", "View Details ↗"); details.type = "button"; details.addEventListener("click", () => showDetails(p)); actions.append(details); if (safeUrl(p.video)) { const watch = make("button", "button button-small button-video", "▶ Watch Video"); watch.type = "button"; watch.setAttribute("aria-label", `Watch demo video for ${p.title}`); watch.addEventListener("click", () => showVideo(p)); actions.append(watch); } const repo = makeGithubButton(p.repositoryUrl, "GitHub", "button button-small button-github"); if (repo) actions.append(repo); body.append(actions); card.append(body); root.append(card); }); if (!items.length) root.append(make("p", "empty-state", "Add projects in projects.js.")); };
   const showDetails = (p) => { const root = $("#dialog-body"); root.replaceChildren(); root.append(make("p", "section-index", p.category || "PROJECT DETAILS")); const title = make("h2", "dialog-title", p.title); title.id = "dialog-title"; root.append(title); const sections = [["Overview", p.overview], ["The problem", p.problem], ["The solution", p.solution], ["My contribution", p.contribution], ["Challenges", p.challenges], ["Future improvements", p.futureImprovements]]; sections.forEach(([h, t]) => { if (t) root.append(make("h3", "dialog-subtitle", h), make("p", "dialog-copy", t)); }); if ((p.features || []).length) { root.append(make("h3", "dialog-subtitle", "Features")); const ul = make("ul", "responsibility-list"); p.features.forEach(x => ul.append(make("li", "", x))); root.append(ul); } if ((p.technologies || []).length) { root.append(make("h3", "dialog-subtitle", "Technologies")); const chips = make("div", "chip-row"); p.technologies.forEach(x => chips.append(make("span", "chip", x))); root.append(chips); }
     const gallery = [...(p.screenshots || [])]; if (p.architectureImage) gallery.push(p.architectureImage); if (gallery.length) { root.append(make("h3", "dialog-subtitle", "Screenshots & architecture")); const imgs = make("div", "dialog-gallery"); gallery.forEach((src, i) => addImage(imgs, src, `${p.title} image ${i + 1}`, "dialog-image")); root.append(imgs); }
     if (p.video) {
@@ -122,6 +122,27 @@
       }
     }
     const actions = make("div", "dialog-actions"); const repo = makeGithubButton(p.repositoryUrl, "GitHub Repository", "button button-github"); const live = link("Live Demo ↗", p.liveUrl, "button button-primary"); if (repo) actions.append(repo); if (live) actions.append(live); if (actions.children.length) root.append(actions); $("#project-dialog").showModal(); };
+  const showVideo = (p) => {
+    const root = $("#dialog-body");
+    const videoUrl = safeUrl(p.video);
+    if (!videoUrl) return;
+    root.replaceChildren(make("p", "section-index", "PROJECT VIDEO"));
+    const title = make("h2", "dialog-title", `${p.title} — Demo Video`); title.id = "dialog-title"; root.append(title);
+    if (/\.mp4(?:$|[?#])/i.test(videoUrl)) {
+      const parsed = new URL(videoUrl, location.href);
+      if (parsed.protocol !== "https:" && parsed.origin !== location.origin) return;
+      const player = document.createElement("video"); player.controls = true; player.preload = "metadata"; player.playsInline = true; player.src = videoUrl; player.className = "dialog-video"; player.setAttribute("aria-label", `${p.title} demo video`); root.append(player);
+    } else {
+      const embedUrl = getTrustedVideoEmbedUrl(videoUrl);
+      if (embedUrl) {
+        const player = document.createElement("iframe"); player.src = embedUrl; player.title = `${p.title} demonstration video`; player.loading = "lazy"; player.referrerPolicy = "strict-origin-when-cross-origin"; player.allow = "encrypted-media; picture-in-picture; web-share"; player.allowFullscreen = true; player.className = "dialog-video"; root.append(player);
+      } else {
+        const fallback = link("Open video demo ↗", videoUrl, "text-link");
+        if (fallback) root.append(fallback);
+      }
+    }
+    $("#project-dialog").showModal();
+  };
   const renderStats = () => {
     const root = $("#stats-list");
     const projects = (window.PROJECTS || []).filter(p => safeUrl(p.repositoryUrl) || safeUrl(p.liveUrl)).length;
