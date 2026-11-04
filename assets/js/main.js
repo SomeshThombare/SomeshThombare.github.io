@@ -44,6 +44,24 @@
     return badge;
   };
   const safeUrl = (value) => { const raw = String(value || "").trim(); if (!raw || raw.startsWith("//") || /^[a-z][a-z0-9+.-]*:/i.test(raw) && !/^(https?:|mailto:)/i.test(raw)) return ""; try { new URL(raw, location.href); return raw; } catch { return ""; } };
+  const getTrustedVideoEmbedUrl = (value) => {
+    const url = safeUrl(value);
+    if (!url) return "";
+    try {
+      const parsed = new URL(url, location.href);
+      if (parsed.protocol !== "https:") return "";
+      const host = parsed.hostname.toLowerCase();
+      const videoId = host === "youtu.be"
+        ? parsed.pathname.split("/").filter(Boolean)[0]
+        : ["youtube.com", "www.youtube.com", "m.youtube.com"].includes(host)
+          ? parsed.searchParams.get("v") || parsed.pathname.match(/^\/(?:embed|shorts|live)\/([^/?]+)/)?.[1]
+          : ["youtube-nocookie.com", "www.youtube-nocookie.com"].includes(host)
+            ? parsed.pathname.match(/^\/embed\/([^/?]+)/)?.[1]
+            : "";
+      if (!videoId || !/^[\w-]{6,}$/.test(videoId)) return "";
+      return `https://www.youtube-nocookie.com/embed/${encodeURIComponent(videoId)}`;
+    } catch { return ""; }
+  };
   const link = (label, href, cls = "text-link") => { const url = safeUrl(href); if (!url) return null; const a = make("a", cls, label); a.href = url; if (/^https?:/.test(url)) { a.target = "_blank"; a.rel = "noopener noreferrer"; } return a; };
   const addImage = (parent, src, alt, cls) => { const url = safeUrl(src); if (!url) return; const img = make("img", cls); img.src = url; img.alt = alt; img.loading = "lazy"; img.onerror = () => img.remove(); parent.append(img); };
   const renderConfig = () => {
@@ -83,7 +101,26 @@
   const renderProjects = () => { const root = $("#projects-list"); const items = window.PROJECTS || []; items.forEach((p, i) => { const card = make("article", "panel project-card"); const visual = make("div", `project-visual project-visual-${i % 3}`); if (p.image) addImage(visual, p.image, `${p.title} preview`, "project-image"); if (!visual.querySelector("img")) visual.append(make("span", "visual-mark", String(i + 1).padStart(2, "0")), make("span", "visual-orbit"), make("span", "visual-caption", (p.technologies || []).slice(0, 3).join(" · "))); card.append(visual); const body = make("div", "project-body"); body.append(make("p", "panel-kicker", p.category || "PROJECT"), make("h3", "project-title", p.title), make("p", "project-summary", p.solution || p.problem || "")); const chips = make("div", "chip-row"); (p.technologies || []).forEach(t => chips.append(make("span", "chip", t))); body.append(chips); const actions = make("div", "project-actions"); const details = make("button", "button button-small button-primary project-detail-button", "View Details ↗"); details.type = "button"; details.addEventListener("click", () => showDetails(p)); actions.append(details); const repo = makeGithubButton(p.repositoryUrl, "GitHub", "button button-small button-github"); if (repo) actions.append(repo); body.append(actions); card.append(body); root.append(card); }); if (!items.length) root.append(make("p", "empty-state", "Add projects in projects.js.")); };
   const showDetails = (p) => { const root = $("#dialog-body"); root.replaceChildren(); root.append(make("p", "section-index", p.category || "PROJECT DETAILS")); const title = make("h2", "dialog-title", p.title); title.id = "dialog-title"; root.append(title); const sections = [["Overview", p.overview], ["The problem", p.problem], ["The solution", p.solution], ["My contribution", p.contribution], ["Challenges", p.challenges], ["Future improvements", p.futureImprovements]]; sections.forEach(([h, t]) => { if (t) root.append(make("h3", "dialog-subtitle", h), make("p", "dialog-copy", t)); }); if ((p.features || []).length) { root.append(make("h3", "dialog-subtitle", "Features")); const ul = make("ul", "responsibility-list"); p.features.forEach(x => ul.append(make("li", "", x))); root.append(ul); } if ((p.technologies || []).length) { root.append(make("h3", "dialog-subtitle", "Technologies")); const chips = make("div", "chip-row"); p.technologies.forEach(x => chips.append(make("span", "chip", x))); root.append(chips); }
     const gallery = [...(p.screenshots || [])]; if (p.architectureImage) gallery.push(p.architectureImage); if (gallery.length) { root.append(make("h3", "dialog-subtitle", "Screenshots & architecture")); const imgs = make("div", "dialog-gallery"); gallery.forEach((src, i) => addImage(imgs, src, `${p.title} image ${i + 1}`, "dialog-image")); root.append(imgs); }
-    if (p.video) { let videoUrl = safeUrl(p.video); if (videoUrl) { try { const parsed = new URL(videoUrl, location.href); if (parsed.hostname === "youtu.be") videoUrl = `https://www.youtube-nocookie.com/embed/${parsed.pathname.slice(1)}`; else if (parsed.hostname.endsWith("youtube.com") && !parsed.pathname.startsWith("/embed/")) { const videoId = parsed.searchParams.get("v") || parsed.pathname.match(/\/(?:shorts|live)\/([^/?]+)/)?.[1]; if (videoId) videoUrl = `https://www.youtube-nocookie.com/embed/${videoId}`; } } catch {} root.append(make("h3", "dialog-subtitle", "Demo video")); if (/\.mp4(?:$|\?)/i.test(videoUrl)) { const v = document.createElement("video"); v.controls = true; v.preload = "metadata"; v.src = videoUrl; v.className = "dialog-video"; root.append(v); } else { const iframe = document.createElement("iframe"); iframe.src = videoUrl; iframe.title = `${p.title} demonstration video`; iframe.loading = "lazy"; iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"; iframe.allowFullscreen = true; iframe.className = "dialog-video"; root.append(iframe); } } }
+    if (p.video) {
+      const videoUrl = safeUrl(p.video);
+      if (videoUrl) {
+        root.append(make("h3", "dialog-subtitle", "Demo video"));
+        if (/\.mp4(?:$|[?#])/i.test(videoUrl)) {
+          const parsed = new URL(videoUrl, location.href);
+          if (parsed.protocol === "https:" || parsed.origin === location.origin) {
+            const v = document.createElement("video"); v.controls = true; v.preload = "metadata"; v.src = videoUrl; v.className = "dialog-video"; root.append(v);
+          }
+        } else {
+          const embedUrl = getTrustedVideoEmbedUrl(videoUrl);
+          if (embedUrl) {
+            const iframe = document.createElement("iframe"); iframe.src = embedUrl; iframe.title = `${p.title} demonstration video`; iframe.loading = "lazy"; iframe.referrerPolicy = "strict-origin-when-cross-origin"; iframe.allow = "encrypted-media; picture-in-picture; web-share"; iframe.allowFullscreen = true; iframe.className = "dialog-video"; root.append(iframe);
+          } else {
+            const demoLink = link("Open video demo ↗", videoUrl, "text-link");
+            if (demoLink) root.append(demoLink);
+          }
+        }
+      }
+    }
     const actions = make("div", "dialog-actions"); const repo = makeGithubButton(p.repositoryUrl, "GitHub Repository", "button button-github"); const live = link("Live Demo ↗", p.liveUrl, "button button-primary"); if (repo) actions.append(repo); if (live) actions.append(live); if (actions.children.length) root.append(actions); $("#project-dialog").showModal(); };
   const renderStats = () => {
     const root = $("#stats-list");

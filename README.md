@@ -68,15 +68,19 @@ Known tools in the Technical Skills section use their Devicon SVG logo from the 
 1. Open `assets/js/projects.js`.
 2. Copy one example project object.
 3. Change its `id`, `title`, `category`, `problem`, `solution`, `technologies`, image paths, and links.
-4. Add screenshots or a demo video if available.
+4. Add screenshots or a demo video if available. You add the files in the repository yourself; there is no public upload form on this static site.
 5. Save and preview the page.
 6. Commit and push the change to GitHub.
 
 Project fields include `overview`, `problem`, `solution`, `features` (array), `contribution`, `technologies` (array), `challenges`, `futureImprovements`, `image` (card cover), `screenshots` (array of paths), `architectureImage`, `video`, `repositoryUrl`, and `liveUrl`. Empty URLs are not shown. Project detail text and images appear in the accessible details dialog.
 
-Images can live under `assets/images/projects/`; certificates can live in `assets/images/certificates/`. Use paths relative to the repository root, for example `assets/images/projects/weather-dashboard.png`. Keep image files reasonably sized and use descriptive alt text via the data-driven title.
+Images can live under `assets/images/projects/`; certificates can live in `assets/images/certificates/`. Copy files into the repository folder, then use paths relative to the repository root, for example `assets/images/projects/weather-dashboard.png`. In each project object, set `image` to the cover path, `screenshots` to an array of paths, or `architectureImage` to the architecture diagram path. Keep image files reasonably sized.
 
-Videos may be a public MP4 path/URL or an embeddable YouTube URL. For YouTube, provide an embed URL such as `https://www.youtube-nocookie.com/embed/VIDEO_ID` (including for unlisted videos when embedding is enabled). The dialog uses playback controls and does not autoplay. Large recordings should be hosted externally rather than committed to Git. Small local MP4s can be placed in `assets/videos/`.
+Videos may be a local MP4 path, an HTTPS MP4 URL, or a YouTube URL. Small local MP4s can be placed in `assets/videos/` and referenced from the project's `video` field, for example `assets/videos/project-demo.mp4`. YouTube URLs are embedded through the privacy-enhanced `youtube-nocookie.com` player. Other HTTPS video pages appear as safe external links and are not embedded. The dialog uses playback controls and does not autoplay. Large recordings should be hosted externally rather than committed to Git.
+
+The original SmartSheti and AI Trading Agent recordings are kept locally but ignored by Git because each is larger than GitHub's 100 MiB file limit. The portfolio uses their compressed `_web.mp4` copies instead.
+
+After adding media and updating `projects.js`, preview the site, check that each path uses the exact filename capitalization, then commit and push. GitHub Pages publishes the files with the next deployment. The current test suite can be run with `node --test tests/portfolio.qa.test.cjs`.
 
 ## Resume
 

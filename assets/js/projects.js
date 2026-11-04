@@ -7,7 +7,7 @@ window.PROJECTS = [
     problem: "Farmers need practical support across crop planning, cultivation, harvest, crop disease identification, fertilizer decisions, and access to government schemes.",
     solution: "Architected a Django platform for Maharashtra farmers, combining eight modules across the crop lifecycle with disease detection, fertilizer recommendations, weather data, a bilingual AI chatbot, and a government schemes portal.",
     technologies: ["Python", "Django", "SQLite", "PostgreSQL", "JavaScript", "HTML", "CSS", "Bootstrap", "Machine Learning", "Deep Learning", "TensorFlow/Keras", "EfficientNet-B0", "Decision Tree", "OpenRouter API", "Twilio SMS Verification", "Kaggle Dataset", "OpenWeatherMap API", "REST API"],
-    image: "", screenshots: [], video: "", repositoryUrl: "https://github.com/SomeshThombare/Smart-Sheti", liveUrl: "",
+    image: "", screenshots: [], video: "assets/videos/Smart_Sheti_web.mp4", repositoryUrl: "https://github.com/SomeshThombare/Smart-Sheti", liveUrl: "",
     overview: "An AI-based smart farming support platform for farmers in Maharashtra. The project was published in HISET-2025 and IRJMETS (2026).",
     features: [
       "Organized support across three crop lifecycle stages: planning, cultivation, and harvest, with eight functional modules.",
@@ -27,7 +27,7 @@ window.PROJECTS = [
     problem: "Analyzing Forex, cryptocurrency, gold, and silver markets and acting on opportunities can involve slow decisions and risk of uncontrolled losses.",
     solution: "Built an AI-assisted trading platform for real-time market analysis, manual AI-recommended trades, and autonomous bot execution with configurable loss controls.",
     technologies: ["Python", "Django", "TensorFlow", "Scikit-learn", "Binance API", "MT5 API", "Gemini 2.5 Lite API", "SQLite", "Chart.js", "REST API"],
-    image: "", screenshots: [], video: "", repositoryUrl: "https://github.com/SomeshThombare/AI-Treading-Agent", liveUrl: "",
+    image: "", screenshots: [], video: "assets/videos/AITreadingAgent_web.mp4", repositoryUrl: "https://github.com/SomeshThombare/AI-Treading-Agent", liveUrl: "",
     overview: "An AI-driven trading platform that analyzes Forex, cryptocurrency, gold, and silver markets and processes 1,000+ market signals per session, according to the resume.",
     features: [
       "Supports manual, AI-recommended trade execution and fully autonomous bot trading.",
